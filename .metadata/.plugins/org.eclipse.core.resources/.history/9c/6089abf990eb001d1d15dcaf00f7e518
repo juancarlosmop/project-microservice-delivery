@@ -1,0 +1,20 @@
+package com.example.users.service;
+
+import com.example.users.dto.RpUser;
+
+public interface IUserService {
+	/*
+	 * Method to create a new User
+	 * @param Client data from User
+	 * 
+	 * */
+	public void createUser(RpUser rpUser);
+	
+	/*
+	 * Method to get a record from User
+	 * @param int id
+	 * 
+	 * */
+	public void getUserById(int id);
+
+}

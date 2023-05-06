@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: user-service
+  profiles.active: dev  
+  cloud:
+    config:
+      enabled: true
+      uri: http://localhost:8081
+      name: ${spring.application.name}
+      profile: ${spring.profiles.active}
+  
+

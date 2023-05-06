@@ -1,0 +1,8 @@
+package com.example.delivery.dto;
+
+import com.example.commons.dto.ProductDto;
+import com.example.commons.dto.UserDto;
+import com.example.delivery.dto.DeliveryItemDto;
+public class DeliveryDto {
+	private ProductDto product;
+}

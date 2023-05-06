@@ -1,0 +1,31 @@
+package com.example.commons.dto;
+
+import java.io.Serializable;
+
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
+public class UserDto implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	@NotNull(message = "The field name cannot be null")
+	@NotEmpty(message = "The field name cannot be empty")
+	private String name;
+	@NotNull(message = "The field name cannot be null")
+	@NotEmpty(message = "The field name cannot be null")
+	@JsonProperty("last_name")
+	private String lastName;
+	@NotNull(message = "The field email cannot be null")
+	@NotEmpty(message = "The field email cannot be null")
+	private String email;
+
+}

@@ -1,0 +1,55 @@
+package com.example.users.service;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.example.users.dto.RpUser;
+import com.example.users.dto.UserDto;
+import com.example.users.model.UserEntity;
+import com.example.users.repository.IUserRepository;
+import com.google.common.reflect.TypeToken;
+
+import org.modelmapper.ModelMapper;
+
+@Service
+public class UserService implements IUserService{
+	
+	@Autowired
+	private IUserRepository userRepository;
+	
+	/**
+	 * (no-javadoc)
+	 * @see com.example.users.service.UserService#createUser( com.example.users.dto.RpUser)
+	 */
+
+	@Override
+	public void createUser(UserDto rpUser) {
+		UserEntity user = new UserEntity();
+		user.setName( rpUser.getName());
+		user.setLastName( rpUser.getLastName());
+		user.setEmail(rpUser.getEmail());
+		userRepository.save(user);
+		
+	}
+
+	@Override
+	public UserDto getUserById(int id) {
+		Optional<UserEntity> user=userRepository.findById(id);
+		return new ModelMapper().map(user.get(), UserDto.class);
+	}
+
+	@Override
+	public List<UserDto> getAllUsers() {
+		ModelMapper mapper = new ModelMapper();
+		List<UserEntity> lsUser = (List<UserEntity>) userRepository.findAll();
+		TypeToken<List<UserDto>> typeToken = new TypeToken<>() {
+		};
+		List<UserDto> list = mapper.map(lsUser, typeToken.getType());
+		return list;
+	}
+
+}

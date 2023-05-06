@@ -1,0 +1,29 @@
+package com.example.users.service;
+
+import com.example.users.dto.RpUser;
+import com.example.users.model.UserEntity;
+
+public interface IUserService {
+	/*
+	 * Method to create a new User
+	 * @param Client data from User
+	 * 
+	 * */
+	public void createUser(RpUser rpUser);
+	
+	/*
+	 * Method to get a record from User
+	 * @param int id
+	 * 
+	 * */
+	public UserEntity getUserById(int id);
+	
+	/*
+	 * Method to get all records from User
+	 * 
+	 * 
+	 * */
+	public List<UserEntity> getAllUsers();
+	
+
+}

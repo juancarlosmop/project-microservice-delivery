@@ -1,0 +1,20 @@
+package com.example.delivery.service;
+
+import com.example.delivery.dto.RqDelivery;
+import com.example.delivery.model.DeliveryEntity;
+
+public interface IDeliveryService {
+	/*
+	 * Method to create a new Delivery with the detail
+	 * @param RqDelivery
+	 * 
+	 * */
+	public void createDelivery(RqDelivery delivery);
+	
+	/*
+	 * Method to get a record from Delivery
+	 * @param int id
+	 * 
+	 * */
+	public DeliveryEntity getByIdDelivery(int id);
+}

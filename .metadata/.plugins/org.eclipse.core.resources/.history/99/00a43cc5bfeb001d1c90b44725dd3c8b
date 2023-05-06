@@ -1,0 +1,24 @@
+package com.example.delivery.model;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+import org.springframework.boot.autoconfigure.domain.EntityScan;
+
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
+@Entity(name="delivery_items")
+@EntityScan({"com.example.commons.dto","com.example.commons.model"})
+public class DeliveryItems {
+	@Id
+	@GeneratedValue(strategy= GenerationType.IDENTITY)
+	@Column(name="id_delivery_item")
+	private int idDeliveryItem;
+	
+}

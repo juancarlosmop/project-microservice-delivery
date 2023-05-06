@@ -1,0 +1,9 @@
+package com.example.delivery.repository;
+
+import org.springframework.data.repository.CrudRepository;
+
+import com.example.delivery.model.DeliveryEntity;
+
+public interface IDeliveryRepository extends CrudRepository<DeliveryEntity,Integer>{
+
+}

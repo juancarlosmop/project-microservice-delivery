@@ -1,0 +1,37 @@
+package com.example.users.service;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.example.users.dto.RpUser;
+import com.example.users.model.UserEntity;
+import com.example.users.repository.IUserRepository;
+
+@Service
+public class UserService implements IUserService{
+	
+	@Autowired
+	private IUserRepository userRepository;
+	
+	@Override
+	public void createUser(RpUser rpUser) {
+		userRepository.save(null);
+		
+	}
+
+	@Override
+	public UserEntity getUserById(int id) {
+		Optional<UserEntity> user=userRepository.findById(id);
+		return user.get();
+	}
+
+	@Override
+	public List<UserEntity> getAllUsers() {
+		List<UserEntity> list =(List<UserEntity>) userRepository.findAll();
+		return list;
+	}
+
+}

@@ -1,0 +1,32 @@
+package com.example.delivery.service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.example.delivery.dto.RqDelivery;
+import com.example.delivery.model.DeliveryEntity;
+import com.example.delivery.repository.IDeliveryItemRepository;
+import com.example.delivery.repository.IDeliveryRepository;
+
+@Service
+public class DeliveryService implements IDeliveryService{
+	
+	@Autowired
+	private IDeliveryRepository deliveryRepository;
+	private IDeliveryItemRepository deliveryItemRepository;
+	
+	@Override
+	public void createBillDelivery(RqDelivery delivery) {
+		DeliveryEntity deliveryEntity = new DeliveryEntity();
+		deliveryEntity.setDateDeliver(delivery.);
+		deliveryRepository.save();
+		
+	}
+
+	@Override
+	public DeliveryEntity getBillByIdDelivery(int id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

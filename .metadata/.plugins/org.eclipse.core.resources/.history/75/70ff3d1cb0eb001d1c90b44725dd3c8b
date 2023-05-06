@@ -1,0 +1,34 @@
+package com.example.product.service;
+
+import java.util.List;
+
+import org.springframework.stereotype.Service;
+
+import com.example.product.dto.ProductDto;
+
+@Service
+public class ProductService implements IProductService {
+	
+	/**
+	 * (no-javadoc)
+	 * @see com.example.users.service.ProductService#createProduct( com.example.product.dto.ProductDto)
+	 */
+	@Override
+	public void createProduct(ProductDto rpUser) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public ProductDto getProductById(int id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<ProductDto> getAllProducts() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+}

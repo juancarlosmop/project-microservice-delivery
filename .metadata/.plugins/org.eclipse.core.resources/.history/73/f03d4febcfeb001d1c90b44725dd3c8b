@@ -1,0 +1,23 @@
+package com.example.delivery.service;
+
+import org.springframework.stereotype.Service;
+
+import com.example.delivery.dto.RqDelivery;
+import com.example.delivery.model.DeliveryEntity;
+
+@Service
+public class DeliveryService implements IDeliveryService{
+
+	@Override
+	public void createBillDelivery(RqDelivery delivery) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public DeliveryEntity getBillByIdDelivery(int id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

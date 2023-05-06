@@ -1,0 +1,51 @@
+package com.example.product.service;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.example.product.dto.ProductDto;
+import com.example.product.repositroy.IProductRepository;
+import com.example.product.model.ProductEntity;
+import org.modelmapper.ModelMapper;
+@Service
+public class ProductService implements IProductService {
+	
+	@Autowired
+	private IProductRepository productRepository;
+	/**
+	 * (no-javadoc)
+	 * @see com.example.users.service.ProductService#createProduct( com.example.product.dto.ProductDto)
+	 */
+	@Override
+	public void createProduct(ProductDto rpUser) {
+		ProductEntity product = new ProductEntity();
+		product.setNameProduct(rpUser.getNameProduct());
+		product.setPrice(rpUser.getPrice());
+		product.setQuantity(rpUser.getQuantity());
+		productRepository.save(product);
+		
+	}
+	
+	/**
+	 * (no-javadoc)
+	 * @see com.example.users.service.ProductService#getProductById(int id)
+	 */
+	@Override
+	public ProductDto getProductById(int id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	/**
+	 * (no-javadoc)
+	 * @see com.example.users.service.ProductService#getAllProducts( )
+	 */
+	@Override
+	public List<ProductDto> getAllProducts() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+}

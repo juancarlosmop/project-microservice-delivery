@@ -1,0 +1,11 @@
+package com.example.delivery.service;
+
+import com.example.delivery.dto.RqDelivery;
+import com.example.delivery.model.DeliveryEntity;
+
+public interface IDeliveryService {
+	
+	public void createBillDelivery(RqDelivery delivery);
+	
+	public DeliveryEntity getBillByIdDelivery(int id);
+}

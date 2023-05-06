@@ -1,0 +1,9 @@
+package com.example.product.model;
+
+import javax.persistence.Entity;
+
+@Entity(name="products")
+public class Product {
+
+	
+}
