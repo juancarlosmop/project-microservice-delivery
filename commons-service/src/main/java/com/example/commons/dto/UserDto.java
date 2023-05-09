@@ -2,6 +2,7 @@ package com.example.commons.dto;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
@@ -17,15 +18,11 @@ public class UserDto implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	@NotNull(message = "The field name cannot be null")
-	@NotEmpty(message = "The field name cannot be empty")
+	@JsonProperty("id_user")
+	private int idUser;
 	private String name;
-	@NotNull(message = "The field name cannot be null")
-	@NotEmpty(message = "The field name cannot be null")
 	@JsonProperty("last_name")
 	private String lastName;
-	@NotNull(message = "The field email cannot be null")
-	@NotEmpty(message = "The field email cannot be null")
 	private String email;
 
 }

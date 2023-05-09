@@ -4,6 +4,7 @@ import java.util.List;
 
 
 import com.example.commons.dto.UserDto;
+import com.example.commons.model.UserEntity;
 
 public interface IUserService {
 	/*
@@ -18,14 +19,14 @@ public interface IUserService {
 	 * @param int id
 	 * 
 	 * */
-	public UserDto getUserById(int id);
+	public UserEntity getUserById(int id);
 	
 	/*
 	 * Method to get all records from User
 	 * 
 	 * 
 	 * */
-	public List<UserDto> getAllUsers();
+	public List<UserEntity> getAllUsers();
 	
 
 }

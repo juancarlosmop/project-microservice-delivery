@@ -4,6 +4,7 @@ import java.util.List;
 
 
 import com.example.commons.dto.ProductDto;
+import com.example.commons.model.ProductEntity;
 public interface IProductService {
 	/*
 	 * Method to create a new Product
@@ -17,12 +18,12 @@ public interface IProductService {
 	 * @param int id
 	 * 
 	 * */
-	public ProductDto getProductById(int id);
+	public ProductEntity getProductById(int id);
 	
 	/*
 	 * Method to get all records from Product
 	 * 
 	 * 
 	 * */
-	public List<ProductDto> getAllProducts();
+	public List<ProductEntity> getAllProducts();
 }

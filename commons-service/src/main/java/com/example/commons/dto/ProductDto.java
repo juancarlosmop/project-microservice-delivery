@@ -17,11 +17,11 @@ public class ProductDto implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	@JsonProperty("nam_product")
+	@JsonProperty("id_product")
+	private int idProduct;
+	@JsonProperty("name_product")
 	private String nameProduct;
-	@NotNull
 	private double price;
-	@NotNull
 	private int quantity;
 
 }

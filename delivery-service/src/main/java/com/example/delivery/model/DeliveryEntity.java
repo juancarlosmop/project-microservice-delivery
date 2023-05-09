@@ -31,7 +31,8 @@ public class DeliveryEntity implements Serializable {
 	@JsonFormat(shape= JsonFormat.Shape.STRING, pattern = "dd-MM-yy")
 	@Column(name="date_delivery")
 	private Date dateDeliver;
-	private String hour;
+	@Column(name="delivery_hour")
+	private String deliveryHour;
 	@OneToMany(mappedBy="delivery")
 	private List<DeliveryItemEntity> deliveryItems;
 	

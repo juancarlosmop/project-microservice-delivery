@@ -17,6 +17,9 @@ import com.example.delivery.dto.RqDelivery;
 import com.example.delivery.model.DeliveryEntity;
 import com.example.delivery.service.IDeliveryService;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @RestController
 @RequestMapping("/delivery")
 public class DeliveryController {
@@ -49,7 +52,9 @@ public class DeliveryController {
 		RpBase rp=new RpBase();
 		rp.setCode("OK");
 		rp.setMessage("delivery was created");
+		log.info("Starting the creation of Delivery");
 		deliveryService.createDelivery(rqDelivery);
+		log.info("End the creation of Delivery");
 		return new ResponseEntity<>(rp,HttpStatus.CREATED);
 	}
 	
@@ -61,6 +66,7 @@ public class DeliveryController {
 	 * */
 	@GetMapping("/get-delivery/{id_delivery}")
 	public DeliveryEntity getDelivery(@PathVariable("id_delivery") int idDelivery) {
+		log.info("Start to get delivery");
 		return deliveryService.getByIdDelivery(idDelivery);
 	}
 

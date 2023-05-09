@@ -1,7 +1,6 @@
 package com.example.product.service;
 
 import java.util.List;
-import java.util.ArrayList;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +10,6 @@ import org.springframework.stereotype.Service;
 import com.example.commons.dto.ProductDto;
 import com.example.commons.model.ProductEntity;
 import com.example.product.repositroy.IProductRepository;
-import org.modelmapper.ModelMapper;
 @Service
 public class ProductService implements IProductService {
 	
@@ -22,11 +20,11 @@ public class ProductService implements IProductService {
 	 * @see com.example.product.service.ProductService#createProduct( com.example.product.dto.ProductDto)
 	 */
 	@Override
-	public void createProduct(ProductDto rpUser) {
+	public void createProduct(ProductDto rpProduct) {
 		ProductEntity product = new ProductEntity();
-		product.setNameProduct(rpUser.getNameProduct());
-		product.setPrice(rpUser.getPrice());
-		product.setQuantity(rpUser.getQuantity());
+		product.setNameProduct(rpProduct.getNameProduct());
+		product.setPrice(rpProduct.getPrice());
+		product.setQuantity(rpProduct.getQuantity());
 		productRepository.save(product);
 		
 	}
@@ -36,9 +34,9 @@ public class ProductService implements IProductService {
 	 * @see com.example.product.service.ProductService#getProductById(int id)
 	 */
 	@Override
-	public ProductDto getProductById(int id) {
+	public ProductEntity getProductById(int id) {
 		Optional<ProductEntity> product= productRepository.findById(id);
-		return new ModelMapper().map(product.get(), ProductDto.class);
+		return product.get();
 	}
 	
 	/**
@@ -46,14 +44,9 @@ public class ProductService implements IProductService {
 	 * @see com.example.product.service.ProductService#getAllProducts( )
 	 */
 	@Override
-	public List<ProductDto> getAllProducts() {
-		ModelMapper mapper = new ModelMapper();
-		List<ProductDto> lsProduct = new ArrayList<>();
+	public List<ProductEntity> getAllProducts() {
 		List<ProductEntity> lspEntity = (List<ProductEntity>) productRepository.findAll();
-		lspEntity.forEach(product->{
-			lsProduct.add( mapper.map(product, ProductDto.class));
-		});
-		return null;
+		return lspEntity;
 	}
 	
 }

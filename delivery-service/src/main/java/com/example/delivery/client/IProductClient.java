@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import com.example.commons.dto.ProductDto;
-
+import com.example.commons.model.ProductEntity;
 
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import io.github.resilience4j.retry.annotation.Retry;
@@ -15,15 +15,15 @@ import io.github.resilience4j.retry.annotation.Retry;
 public interface IProductClient {
 	
 	@GetMapping("/product/get-product/{id_product}")
-	@Retry(name="productServiceCB")
-	@CircuitBreaker(name="productServiceCB", fallbackMethod="getProductFallback")
-	public ProductDto getProductById(@PathVariable("id_product") int idProduct);
+	//@Retry(name="productServiceCB")
+	//@CircuitBreaker(name="productServiceCB", fallbackMethod="getProductFallback")
+	public ProductEntity getProductById(@PathVariable("id_product") int idProduct);
 	
 	
-	default String getProductFallback(Throwable exception) {
+	/*default String getProductFallback(Throwable exception) {
 		System.out.println("Exception class=" + exception.getClass().getName());
 		System.out.println("Exception took place: " + exception.getMessage());
 		return "something happen";
-	}
+	}*/
 
 }

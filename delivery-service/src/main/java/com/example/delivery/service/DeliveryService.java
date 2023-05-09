@@ -1,5 +1,6 @@
 package com.example.delivery.service;
 
+import java.util.Date;
 import java.util.Optional;
 
 import org.modelmapper.ModelMapper;
@@ -13,10 +14,8 @@ import com.example.delivery.model.DeliveryItemEntity;
 import com.example.delivery.model.DeliveryEntity;
 import com.example.delivery.repository.IDeliveryItemRepository;
 import com.example.delivery.repository.IDeliveryRepository;
-import com.example.commons.dto.UserDto;
 import com.example.commons.model.ProductEntity;
 import com.example.commons.model.UserEntity;
-import com.example.commons.dto.ProductDto;
 @Service
 public class DeliveryService implements IDeliveryService{
 	
@@ -38,18 +37,18 @@ public class DeliveryService implements IDeliveryService{
 	 */
 	@Override
 	public void createDelivery(RqDelivery delivery) {
-		ModelMapper mapper = new ModelMapper();
+		
 		DeliveryEntity deliveryEntity = new DeliveryEntity();
-		deliveryEntity.setDateDeliver(delivery.getDateDeliver());
-		deliveryEntity.setHour(delivery.getHour());
+		deliveryEntity.setDateDeliver(new Date());
+		deliveryEntity.setDeliveryHour(delivery.getHour());
 		DeliveryEntity newDelivery=deliveryRepository.save(deliveryEntity);
 		delivery.getDeliveryItems().forEach(deliv->{
 			DeliveryItemEntity delivItem = new DeliveryItemEntity();
 			delivItem.setDelivery(newDelivery);
-			UserDto user=userClient.getUserById( deliv.getIdUser() );
-			delivItem.setUser(mapper.map(user, UserEntity.class));
-			ProductDto product =productClient.getProductById( deliv.getIdProduct());
-			delivItem.setProduct(mapper.map(product, ProductEntity.class));
+			UserEntity user=userClient.getUserById(deliv.getIdUser());
+			delivItem.setUser(user);
+			ProductEntity product =productClient.getProductById( deliv.getIdProduct());
+			delivItem.setProduct(product);
 			
 			deliveryItemRepository.save(delivItem);
 		});

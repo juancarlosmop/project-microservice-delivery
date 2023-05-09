@@ -16,8 +16,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.users.service.IUserService;
+
+import lombok.extern.slf4j.Slf4j;
+
 import com.example.commons.dto.RpBase;
 import com.example.commons.dto.UserDto;
+import com.example.commons.model.UserEntity;
+@Slf4j
 @RestController
 @RequestMapping("/user")
 public class UserController {
@@ -42,7 +47,9 @@ public class UserController {
 		RpBase rp = new RpBase();
 		rp.setMessage("the user was created");
 		rp.setCode("OK");
+		log.info("Starting the creation of user");
 		userService.createUser(rpUser);
+		log.info("End of creation of user");
 		return new ResponseEntity<>(rp,HttpStatus.CREATED);
 	}
 	
@@ -54,8 +61,10 @@ public class UserController {
 	 * */
 
 	@GetMapping("/get-user/{id_user}")
-	public ResponseEntity<UserDto> getUserById(@PathVariable("id_user") int idUser) {
-		UserDto user=userService.getUserById(idUser);
+	public ResponseEntity<UserEntity> getUserById(@PathVariable("id_user") int idUser) {
+		log.info("starting to get user by id");
+		UserEntity user=userService.getUserById(idUser);
+		log.info("starting to get user by id");
 		return new ResponseEntity<>(user,HttpStatus.OK);
 	}
 	
@@ -67,8 +76,10 @@ public class UserController {
 	 * */
 
 	@GetMapping("/get-users")
-	public ResponseEntity<List<UserDto>> getAllUsers() {
-		List<UserDto> lsuser=userService.getAllUsers();
+	public ResponseEntity<List<UserEntity>> getAllUsers() {
+		log.info("starting to get all users");
+		List<UserEntity> lsuser=userService.getAllUsers();
+		log.info("end to get all user");
 		return new ResponseEntity<>(lsuser,HttpStatus.OK);
 	}
 

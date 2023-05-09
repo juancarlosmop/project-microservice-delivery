@@ -23,7 +23,7 @@ public class ProductEntity implements Serializable  {
 	@GeneratedValue(strategy= GenerationType.IDENTITY)
 	@Column(name="id_product")
 	private int idProduct;
-	@Column(name="nam_product")
+	@Column(name="name_product")
 	private String nameProduct;
 	private double price;
 	private int quantity;

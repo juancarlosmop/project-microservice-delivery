@@ -2,7 +2,6 @@ package com.example.users.service;
 
 
 import java.util.List;
-import java.util.ArrayList;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,8 +13,6 @@ import com.example.commons.dto.UserDto;
 import com.example.commons.model.UserEntity;
 import com.example.users.repository.IUserRepository;
 
-
-import org.modelmapper.ModelMapper;
 
 @Service
 public class UserService implements IUserService{
@@ -42,9 +39,9 @@ public class UserService implements IUserService{
 	 * @see com.example.users.service.UserService#getUserById(int id)
 	 */
 	@Override
-	public UserDto getUserById(int id) {
+	public UserEntity getUserById(int id) {
 		Optional<UserEntity> user=userRepository.findById(id);
-		return new ModelMapper().map(user.get(), UserDto.class);
+		return user.get();
 	}
 	
 	/**
@@ -52,14 +49,9 @@ public class UserService implements IUserService{
 	 * @see com.example.users.service.UserService#getAllUsers()
 	 */
 	@Override
-	public List<UserDto> getAllUsers() {
-		List<UserDto> list = new ArrayList<>();
-		ModelMapper mapper = new ModelMapper();
+	public List<UserEntity> getAllUsers() {
 		List<UserEntity> lsUser = (List<UserEntity>) userRepository.findAll();
-		lsUser.forEach(user->{
-			list.add( mapper.map(user,UserDto.class ));
-		});
-		return list;
+		return lsUser;
 	}
 
 }
