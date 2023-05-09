@@ -9,7 +9,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 @SpringBootApplication
 @EnableEurekaClient
 @EnableFeignClients
-@EntityScan({"com.example.commons.dto","com.example.commons.model"})
+@EntityScan({"com.example.commons.dto","com.example.commons.model","com.example.delivery.model","com.example.delivery.dto"})
 public class DeliveryServiceApplication {
 
 	public static void main(String[] args) {

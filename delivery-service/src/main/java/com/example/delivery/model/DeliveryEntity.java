@@ -18,7 +18,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@Entity(name="delivery")
+@Entity(name="deliveries")
 public class DeliveryEntity implements Serializable {
 	/**
 	 * 
