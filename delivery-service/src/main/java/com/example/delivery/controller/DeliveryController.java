@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.example.commons.dto.RpBase;
-import com.example.delivery.client.IUserClient;
 import com.example.delivery.dto.RqDelivery;
 import com.example.delivery.model.DeliveryEntity;
 import com.example.delivery.service.IDeliveryService;
@@ -23,9 +22,7 @@ import lombok.extern.slf4j.Slf4j;
 @RestController
 @RequestMapping("/delivery")
 public class DeliveryController {
-	
-	@Autowired
-	private IUserClient userClient;
+
 	
 	@Autowired
 	private IDeliveryService deliveryService;
@@ -35,11 +32,7 @@ public class DeliveryController {
 		return "hello from delivery";
 	}
 	
-	@GetMapping("/testUser")
-	public String testUser() {
-		
-		return userClient.testValue();
-	}
+	
 	
 	/*
 	 * Method to create a new Delivery

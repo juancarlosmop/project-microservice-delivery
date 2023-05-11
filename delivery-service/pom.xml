@@ -96,6 +96,18 @@
 			<artifactId>mysql-connector-j</artifactId>
 			<scope>runtime</scope>
 		</dependency>
+		<!-- Redisson dependencies-->	
+		<dependency>
+    		<groupId>org.redisson</groupId>
+    		<artifactId>redisson</artifactId>
+    		<version>3.16.1</version>
+		</dependency>
+		<dependency>
+    		<groupId>org.redisson</groupId>
+    		<artifactId>redisson-spring-boot-starter</artifactId>
+    		<version>3.16.1</version>
+		</dependency>
+		<!---->
 	</dependencies>
 	<dependencyManagement>
 		<dependencies>

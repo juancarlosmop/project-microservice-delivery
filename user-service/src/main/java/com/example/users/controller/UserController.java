@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.users.service.IUserService;
 
+
 import lombok.extern.slf4j.Slf4j;
 
 import com.example.commons.dto.RpBase;
@@ -41,7 +42,6 @@ public class UserController {
 	 * @param RpUser information
 	 * @return ResponseEntity response of the operation
 	 * */
-
 	@PostMapping("/create-user")
 	public ResponseEntity<RpBase> createUser(@Valid @RequestBody UserDto rpUser) {
 		RpBase rp = new RpBase();
@@ -59,7 +59,6 @@ public class UserController {
 	 * @param id_user
 	 * @return ResponseEntity response of the operation
 	 * */
-
 	@GetMapping("/get-user/{id_user}")
 	public ResponseEntity<UserEntity> getUserById(@PathVariable("id_user") int idUser) {
 		log.info("starting to get user by id");
@@ -74,7 +73,6 @@ public class UserController {
 	 * 
 	 * @return ResponseEntity response of the operation
 	 * */
-
 	@GetMapping("/get-users")
 	public ResponseEntity<List<UserEntity>> getAllUsers() {
 		log.info("starting to get all users");

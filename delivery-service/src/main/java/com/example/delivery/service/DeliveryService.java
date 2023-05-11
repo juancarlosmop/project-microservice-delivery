@@ -4,11 +4,12 @@ import java.util.Date;
 import java.util.Optional;
 
 import org.modelmapper.ModelMapper;
+import org.redisson.api.RBucket;
+import org.redisson.api.RedissonClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.delivery.client.IProductClient;
-import com.example.delivery.client.IUserClient;
 import com.example.delivery.dto.RqDelivery;
 import com.example.delivery.model.DeliveryItemEntity;
 import com.example.delivery.model.DeliveryEntity;
@@ -19,17 +20,16 @@ import com.example.commons.model.UserEntity;
 @Service
 public class DeliveryService implements IDeliveryService{
 	
-	@Autowired
-	private IDeliveryRepository deliveryRepository;
-	@Autowired
-	private IDeliveryItemRepository deliveryItemRepository;
-	
-	@Autowired
-	private IUserClient userClient;
-	
-	@Autowired
-	private IProductClient productClient;
-	
+	private final RedissonClient redissonClient;
+	private final IDeliveryRepository deliveryRepository;
+	private final IProductClient productClient;
+	private final IDeliveryItemRepository deliveryItemRepository;
+	public DeliveryService(RedissonClient redissonClient,IDeliveryRepository deliveryRepository,IProductClient productClient,IDeliveryItemRepository deliveryItemRepository) {
+        this.redissonClient = redissonClient;
+        this.deliveryRepository = deliveryRepository;
+        this.productClient = productClient;
+        this.deliveryItemRepository = deliveryItemRepository;
+    }
 	
 	/**
 	 * (no-javadoc)
@@ -37,7 +37,8 @@ public class DeliveryService implements IDeliveryService{
 	 */
 	@Override
 	public void createDelivery(RqDelivery delivery) {
-		
+		RBucket<UserEntity> bucket = redissonClient.getBucket("user:1");
+		UserEntity user = bucket.get();
 		DeliveryEntity deliveryEntity = new DeliveryEntity();
 		deliveryEntity.setDateDeliver(new Date());
 		deliveryEntity.setDeliveryHour(delivery.getHour());
@@ -45,7 +46,6 @@ public class DeliveryService implements IDeliveryService{
 		delivery.getDeliveryItems().forEach(deliv->{
 			DeliveryItemEntity delivItem = new DeliveryItemEntity();
 			delivItem.setDelivery(newDelivery);
-			UserEntity user=userClient.getUserById(deliv.getIdUser());
 			delivItem.setUser(user);
 			ProductEntity product =productClient.getProductById( deliv.getIdProduct());
 			delivItem.setProduct(product);

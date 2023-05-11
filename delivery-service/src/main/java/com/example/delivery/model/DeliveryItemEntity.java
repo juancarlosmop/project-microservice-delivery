@@ -15,6 +15,7 @@ import lombok.Setter;
 
 import com.example.commons.model.ProductEntity;
 import com.example.commons.model.UserEntity;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @Getter
 @Setter
 @Entity(name="delivery_items")
@@ -35,7 +36,7 @@ public class DeliveryItemEntity implements Serializable {
 	private ProductEntity product;
 	@ManyToOne
 	@JoinColumn(name="id_delivery")
-	//@JsonIgnoreProperties({"deliveryItems"})
+	@JsonIgnoreProperties({"deliveryItems"})
 	private DeliveryEntity delivery;
 	
 }

@@ -2,8 +2,9 @@ package com.example.users.service;
 
 
 import java.util.List;
-import java.util.Optional;
 
+import org.redisson.api.RBucket;
+import org.redisson.api.RedissonClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,8 +18,13 @@ import com.example.users.repository.IUserRepository;
 @Service
 public class UserService implements IUserService{
 	
-	@Autowired
-	private IUserRepository userRepository;
+	private final RedissonClient redissonClient;
+	private final IUserRepository userRepository;
+	public UserService(RedissonClient redissonClient,IUserRepository userRepository) {
+        this.redissonClient = redissonClient;
+        this.userRepository = userRepository;
+	}
+
 	
 	/**
 	 * (no-javadoc)
@@ -38,11 +44,22 @@ public class UserService implements IUserService{
 	 * (no-javadoc)
 	 * @see com.example.users.service.UserService#getUserById(int id)
 	 */
-	@Override
-	public UserEntity getUserById(int id) {
-		Optional<UserEntity> user=userRepository.findById(id);
-		return user.get();
-	}
+		
+		@Override
+		public UserEntity getUserById(int id) {
+			RBucket<UserEntity> bucket = redissonClient.getBucket("user:" + id);
+			UserEntity user = bucket.get();
+			if (user == null) {
+				//if there are not records in Redis
+				user=userRepository.findById(id).get();
+				if (user != null) {
+	                // if the user exist in database
+	                bucket.set(user);
+	            }
+			}
+			System.out.print(bucket.get().toString());
+			return user;
+		}
 	
 	/**
 	 * (no-javadoc)
