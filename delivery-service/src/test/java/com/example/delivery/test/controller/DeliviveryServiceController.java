@@ -1,12 +1,12 @@
 package com.example.delivery.test.controller;
 
-import static org.mockito.ArgumentMatchers.any;
+
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.util.Collections;
-
+import com.example.commons.util.CommonUtil;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -46,7 +46,7 @@ public class DeliviveryServiceController {
 		deliveryService.createDelivery(delivery);
 		//then
 		mockMvc.perform(MockMvcRequestBuilders.post("/delivery/create-bill-deliveryr/").contentType(MediaType.APPLICATION_JSON)
-				.content(this.convertOjectToJson(delivery))).andExpect(MockMvcResultMatchers.status().isCreated())
+				.content(CommonUtil.convertOjectToJson(delivery))).andExpect(MockMvcResultMatchers.status().isCreated())
 				.andExpect(MockMvcResultMatchers.jsonPath("$.code").value("OK"))
 				.andExpect(MockMvcResultMatchers.jsonPath("$.message").value("delivery was created")); 
         verify(deliveryService, times(1)).createDelivery(delivery);
@@ -78,16 +78,5 @@ public class DeliviveryServiceController {
 				.andExpect(MockMvcResultMatchers.jsonPath("$.[0].deliveryItems.idProduct").value(1))
 				.andExpect(MockMvcResultMatchers.jsonPath("$.[0].deliveryItems.idUser").value(1));
 		
-	}
-	public String convertOjectToJson(Object object) {
-
-		ObjectMapper objectMapper = new ObjectMapper();
-		String json = "";
-		try {
-			json = objectMapper.writeValueAsString(object);
-		} catch (JsonProcessingException e) {
-			e.printStackTrace();
-		}
-		return json;
 	}
 }

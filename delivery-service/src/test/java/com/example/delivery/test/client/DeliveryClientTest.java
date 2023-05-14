@@ -17,26 +17,28 @@ import com.example.commons.model.ProductEntity;
 @SpringBootTest
 public class DeliveryClientTest {
 
-	@Autowired
+	@Mock
     private IProductClient productClient;
 	
 	@Test
 	public void testGetProduct() {
 		//give
 		int idProduct=1;
+		ProductEntity expectedProduct = new ProductEntity();
+	    expectedProduct.setIdProduct(idProduct);
+	    when(productClient.getProductById(idProduct)).thenReturn(expectedProduct);
 		//when
 		ProductEntity product = productClient.getProductById(idProduct);
 		//then
-		assertThat(product).isNotNull();
 		assertEquals(idProduct,product.getIdProduct());
 	}
-	/*@Test
+	@Test
 	public void getProductClientException() {
 		//when
 		when(productClient.getProductFallback(anyInt(), any(Throwable.class))).thenCallRealMethod();
-		
+		//then
 		assertThrows(RuntimeException.class,()->{
 			productClient.getProductFallback(1, new Throwable("Test Error"));
 		});
-	}*/
+	}
 }

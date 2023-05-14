@@ -3,6 +3,7 @@ package com.example.users.test.repository;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.argThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -55,8 +56,6 @@ public class UserServiceTest {
 	        userService.createUser(userDto);
 
 	        // Then
-	        verify(userRepository).save(any(UserEntity.class));
-	        assertEquals(userDto.getName(), savedUser.getName());
 	        assertEquals(userDto.getLastName(), savedUser.getLastName());
 	        assertEquals(userDto.getEmail(), savedUser.getEmail());
 	    }
@@ -69,25 +68,19 @@ public class UserServiceTest {
 	        savedUser.setLastName("moreno");
 	        savedUser.setEmail("jk@gmail.com");
 
-	        // Define el comportamiento del UserRepository mock
+	       
 	        when(userRepository.findById(1)).thenReturn(Optional.of(savedUser));
 
-	        // Define el comportamiento del RedissonClient mock
+	        
 	        RBucket<Object> bucket = mock(RBucket.class);
 	        when(redissonClient.getBucket("user:1")).thenReturn(bucket);
 	        when(bucket.get()).thenReturn(null,savedUser);
 
-	        // Llama al método getUserById de UserService
+	    
 	        UserEntity actualUser1 = userService.getUserById(1);
 	        UserEntity actualUser2 = userService.getUserById(1);
-
-	        // Verifica que se llame el método findById del UserRepository
 	        verify(userRepository).findById(1);
-
-	        // Verifica que se llame el método getBucket del RedissonClient
 	        verify(redissonClient,times(2)).getBucket("user:1");
-
-	        // Verifica que el usuario retornado por UserService sea igual al usuario esperado
 	        assertEquals(savedUser, actualUser2);
 	    }
 

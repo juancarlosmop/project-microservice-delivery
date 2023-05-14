@@ -16,10 +16,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.users.service.IUserService;
-
-import io.swagger.v3.oas.annotations.OpenAPIDefinition;
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.info.Info;
 import lombok.extern.slf4j.Slf4j;
 
 import com.example.commons.dto.RpBase;
@@ -28,30 +24,16 @@ import com.example.commons.model.UserEntity;
 @Slf4j
 @RestController
 @RequestMapping("/user")
-@OpenAPIDefinition(
-	    info = @Info(
-	        title = "Mi API",
-	        version = "1.0",
-	        description = "Descripción de mi API"
-	    )
-	)
 public class UserController {
 	
 	@Autowired
 	private  IUserService userService;
-	@GetMapping("/test")
-	public String testValue() {
-		
-		return "hello from users";
-	}
-	
 	/*
 	 * Method to create a new user
 	 * 
 	 * @param RpUser information
 	 * @return ResponseEntity response of the operation
 	 * */
-	@Operation(summary = "create a new user")
 	@PostMapping("/create-user")
 	public ResponseEntity<RpBase> createUser(@Valid @RequestBody UserDto rpUser) {
 		RpBase rp = new RpBase();

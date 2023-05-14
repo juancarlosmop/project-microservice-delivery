@@ -26,14 +26,6 @@ public class DeliveryController {
 	
 	@Autowired
 	private IDeliveryService deliveryService;
-	@GetMapping("/test")
-	public String testValue() {
-		
-		return "hello from delivery";
-	}
-	
-	
-	
 	/*
 	 * Method to create a new Delivery
 	 * 

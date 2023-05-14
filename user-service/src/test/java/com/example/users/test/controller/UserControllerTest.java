@@ -1,6 +1,6 @@
 package com.example.users.test.controller;
 
-import static org.mockito.ArgumentMatchers.any;
+
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -21,7 +21,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.http.MediaType;
 import java.util.ArrayList;
 import java.util.List;
-
+import com.example.commons.util.CommonUtil;
 @SpringBootTest
 @AutoConfigureMockMvc
 public class UserControllerTest {
@@ -43,7 +43,7 @@ public class UserControllerTest {
         
       //then
         mockMvc.perform(MockMvcRequestBuilders.post("/user/create-user/").contentType(MediaType.APPLICATION_JSON)
-				.content(this.convertOjectToJson(userDto))).andExpect(MockMvcResultMatchers.status().isCreated())
+				.content(CommonUtil.convertOjectToJson(userDto))).andExpect(MockMvcResultMatchers.status().isCreated())
 				.andExpect(MockMvcResultMatchers.jsonPath("$.code").value("OK"))
 				.andExpect(MockMvcResultMatchers.jsonPath("$.message").value("the user was created")); 
         verify(userService, times(1)).createUser(userDto);
@@ -98,16 +98,4 @@ public class UserControllerTest {
 		
 	}
 	
-	
-	public String convertOjectToJson(Object object) {
-
-		ObjectMapper objectMapper = new ObjectMapper();
-		String json = "";
-		try {
-			json = objectMapper.writeValueAsString(object);
-		} catch (JsonProcessingException e) {
-			e.printStackTrace();
-		}
-		return json;
-	}
 }

@@ -28,12 +28,6 @@ public class ProductController {
 	
 	@Autowired 
 	private IProductService productService;
-	@GetMapping("/test")
-	public String testValue() {
-		
-		return "hello from produc";
-	}
-	
 	/*
 	 * Method to create a new Product
 	 * 

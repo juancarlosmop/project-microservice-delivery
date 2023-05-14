@@ -13,7 +13,6 @@ import com.example.commons.dto.UserDto;
 import com.example.commons.model.UserEntity;
 import com.example.users.repository.IUserRepository;
 
-
 @Service
 public class UserService implements IUserService{
 	
@@ -36,7 +35,6 @@ public class UserService implements IUserService{
 		user.setLastName( rpUser.getLastName());
 		user.setEmail(rpUser.getEmail());
 		userRepository.save(user);
-		
 	}
 	
 	/**
